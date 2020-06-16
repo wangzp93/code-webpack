@@ -14,7 +14,9 @@
     "zf-pack": "./bin/zf-pack.js"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.2",
     "@babel/generator": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
     "@babel/traverse": "^7.10.1",
     "@babel/types": "^7.10.2",
     "babylon": "^6.18.0",

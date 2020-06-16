@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const P = require('./plugins/p.js');
+const DownPlugin = require('./plugins/down-plugin.js');
+const AsyncPlugin = require('./plugins/async-plugin.js');
+const FileListPlugin = require('./plugins/file-list-plugin.js');
 
 module.exports = {
 	mode: 'development',
@@ -11,14 +13,26 @@ module.exports = {
 	},
 	module: {
 		rules: [{
+			test: /\.js$/,
+			use: {
+				loader: 'babel-loader',
+				options: {
+					presets: '@babel/preset-env'
+				}
+			}
+		}, {
 			test: /\.less$/,
 			use: [
-				path.resolve(__dirname, 'loader', 'style-loader'),
-				path.resolve(__dirname, 'loader', 'less-loader')
+				path.resolve(__dirname, 'loaders', 'style-loader'),
+				path.resolve(__dirname, 'loaders', 'less-loader')
 			]
 		}]
 	},
 	plugins: [
-		new P()
+		new DownPlugin(),
+		new AsyncPlugin(),
+		new FileListPlugin({
+			filename: 'list.md'
+		})
 	]
 }
